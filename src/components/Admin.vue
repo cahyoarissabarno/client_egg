@@ -1,41 +1,39 @@
 <template>
     <div>
-        Admin Page
-    <input type="number" v-model="device_id">
-    <button @click="createDevice">Create</button>
-    <button @click="logout">Logout</button>
+        Admin Page 
+        <br>
+        <h2>Create New Device ID</h2>
+        <input type="number" v-model="device_id">
+        <button @click="createDevice">Create</button>
+        <button @click="logout">Logout</button>   
+        
+        <AdminDevice></AdminDevice>
+        <AdminUser></AdminUser>
+
     </div>
 </template>
 <script>
     import axios from 'axios';
+    import AdminDevice from './AdminDevice.vue';
+    import AdminUser from './AdminUser.vue';
 
     export default {
         name: 'Admin',
+        components:{
+            AdminDevice, AdminUser
+        },
         data(){
             return {
-                devices: null,
                 device_id: '',
                 message:''
             }
-        },
-        created(){
-            axios.get('http://localhost:3000/api/device/admin', {
-                headers: { token: localStorage.getItem('token') }
-            })
-            .then(res => {
-                if (res.status === 200) {
-                    this.devices = res.data.devices
-                }
-            },err => {
-                this.$router.push('/login')
-            });
         },
         methods: {
             createDevice(){
                 let device = {
                     device_id: this.device_id
                 }
-                axios.post('http://localhost:3000/api/device/admin', device, {
+                axios.post('http://localhost:3000/api/admin/device', device, {
                     headers: { token: localStorage.getItem('token') }
                 })
                 .then(res => {
