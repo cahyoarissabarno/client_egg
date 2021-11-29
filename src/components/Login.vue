@@ -80,7 +80,7 @@
                     email: this.email,
                     password: this.password
                 }
-                axios.post(`${process.env.VUE_APP_API_URL}/api/user/login`, user)
+                axios.post(`https://api-egg.herokuapp.com/api/user/login`, user)
                 .then(res=>{
                     if (res.status === 200) {
                         localStorage.setItem('token', res.data.token)
