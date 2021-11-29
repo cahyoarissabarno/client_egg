@@ -216,7 +216,7 @@
             this.currentUrl = window.location.href
         },
         mounted(){
-            axios.get(`http://localhost:3000/api/device/dashboard/${this.$route.params.device_id}`, {
+            axios.get(`${process.env.VUE_APP_API_URL}/api/device/dashboard/${this.$route.params.device_id}`, {
                 headers: { token: localStorage.getItem('token') }
             })
             .then(res => {
@@ -271,22 +271,6 @@
 
                 return this.day = result
             },
-            // addSlot(){
-            //     let newSlot = {
-            //         device_id : this.device[0]._id,
-            //         egg_sum : this.egg_sum,
-            //         started_at : this.started_at
-            //     }
-            //     axios.put('http://localhost:3000/api/timeline/add', newSlot, {
-            //         headers: { token: localStorage.getItem('token') }
-            //     })
-            //     .then(res=>{
-            //         this.message = "Berhasil Menambahkan Slot"
-            //         this.$router.go()
-            //     }, err => {
-            //         this.message = "Menambah Slot Gagal," + this.message + " " + err.response.data.message + " (" + err.response.status +")" 
-            //     })
-            // },
             editSlot(noSlot){
                 this.currentSlot = this.slots[noSlot-1]
             }, 
@@ -298,7 +282,7 @@
                     started_at : this.new_started_at ? this.new_started_at : this.currentSlot.started_at,
                     status : "Berjalan"
                 }
-                axios.put('http://localhost:3000/api/timeline/update', newSlot, {
+                axios.put(`${process.env.VUE_APP_API_URL}/api/timeline/update`, newSlot, {
                     headers: { token: localStorage.getItem('token') }
                 })
                 .then(res=>{
@@ -315,7 +299,7 @@
                     device_id : this.device[0]._id,
                     slot_no : this.currentSlot.slot_no
                 }
-                axios.put('http://localhost:3000/api/timeline/delete', slot, {
+                axios.put(`${process.env.VUE_APP_API_URL}/api/timeline/delete`, slot, {
                     headers: { token: localStorage.getItem('token') }
                 })
                 .then(res=>{

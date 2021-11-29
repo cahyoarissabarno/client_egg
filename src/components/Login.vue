@@ -80,7 +80,7 @@
                     email: this.email,
                     password: this.password
                 }
-                axios.post('http://localhost:3000/api/user/login', user)
+                axios.post(`${process.env.VUE_APP_API_URL}/api/user/login`, user)
                 .then(res=>{
                     if (res.status === 200) {
                         localStorage.setItem('token', res.data.token)
@@ -99,7 +99,7 @@
                 let data = {
                     email: this.emailReset
                 }
-                axios.put('http://localhost:3000/api/user/reset-password', data)
+                axios.put(`${process.env.VUE_APP_API_URL}/api/user/reset-password`, data)
                 .then(res=>{
                     if (res.status === 200) {
                         this.message = 'Link reset password telah dikirim, silahkan cek email anda'

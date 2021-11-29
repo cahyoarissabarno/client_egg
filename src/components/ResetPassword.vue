@@ -52,7 +52,7 @@ export default {
                 password: this.password
             }
             if (this.password == this.password2) {
-                axios.put(`http://localhost:3000/api/user/reset-password/${this.$route.params.token}`, data)
+                axios.put(`${process.env.VUE_APP_API_URL}/api/user/reset-password/${this.$route.params.token}`, data)
                 .then(res=>{
                     if (res.status === 200) {
                         this.message = ''

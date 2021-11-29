@@ -33,7 +33,7 @@
                 let device = {
                     device_id: this.device_id
                 }
-                axios.post('http://localhost:3000/api/admin/device', device, {
+                axios.post(`${process.env.VUE_APP_API_URL}/api/admin/device`, device, {
                     headers: { token: localStorage.getItem('token') }
                 })
                 .then(res => {

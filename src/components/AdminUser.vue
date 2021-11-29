@@ -57,7 +57,7 @@
             }
         },
         mounted(){
-            axios.get('http://localhost:3000/api/admin/user', {
+            axios.get(`${process.env.VUE_APP_API_URL}/api/admin/user`, {
                 headers: { token: localStorage.getItem('token') }
             })
             .then(res => {

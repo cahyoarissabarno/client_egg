@@ -88,7 +88,7 @@
             }
         },
         mounted(){
-            axios.get('http://localhost:3000/api/device/', {
+            axios.get(`${process.env.VUE_APP_API_URL}/api/device/`, {
                 headers: { token: localStorage.getItem('token') }
             })
             .then(res => {
@@ -107,7 +107,7 @@
                     device_id: this.device_id,
                     device_name: this.device_name
                 }
-                axios.put('http://localhost:3000/api/device/add', newDevice, {
+                axios.put(`${process.env.VUE_APP_API_URL}/api/device/add`, newDevice, {
                     headers: { token: localStorage.getItem('token') }
                 })
                 .then(res=>{
