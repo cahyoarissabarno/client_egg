@@ -216,7 +216,7 @@
             this.currentUrl = window.location.href
         },
         mounted(){
-            axios.get(`${process.env.VUE_APP_API_URL}/api/device/dashboard/${this.$route.params.device_id}`, {
+            axios.get(`https://api-egg.herokuapp.com/api/device/dashboard/${this.$route.params.device_id}`, {
                 headers: { token: localStorage.getItem('token') }
             })
             .then(res => {
@@ -282,7 +282,7 @@
                     started_at : this.new_started_at ? this.new_started_at : this.currentSlot.started_at,
                     status : "Berjalan"
                 }
-                axios.put(`${process.env.VUE_APP_API_URL}/api/timeline/update`, newSlot, {
+                axios.put(`https://api-egg.herokuapp.com/api/timeline/update`, newSlot, {
                     headers: { token: localStorage.getItem('token') }
                 })
                 .then(res=>{
@@ -299,7 +299,7 @@
                     device_id : this.device[0]._id,
                     slot_no : this.currentSlot.slot_no
                 }
-                axios.put(`${process.env.VUE_APP_API_URL}/api/timeline/delete`, slot, {
+                axios.put(`https://api-egg.herokuapp.com/api/timeline/delete`, slot, {
                     headers: { token: localStorage.getItem('token') }
                 })
                 .then(res=>{

@@ -67,7 +67,7 @@
                     password: this.password,
                     device_id: this.device_id
                 }
-                axios.post(`${process.env.VUE_APP_API_URL}/api/user/register`, newUser)
+                axios.post(`https://api-egg.herokuapp.com/api/user/register`, newUser)
                 .then(res=>{
                     this.message = ''
                     this.$router.push('/login')

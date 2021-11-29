@@ -49,7 +49,7 @@ router.beforeEach((to, from, next)=>{
   } 
   if (to.name === 'login' && localStorage.getItem('token') != null) next(from) 
   if (to.name === 'admin'){
-    axios.get(`${process.env.VUE_APP_API_URL}/api/admin/validate`, {
+    axios.get(`https://api-egg.herokuapp.com/api/admin/validate`, {
         headers: { token: localStorage.getItem('token') }
     })
     .then(res => {

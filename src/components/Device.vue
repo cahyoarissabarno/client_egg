@@ -88,7 +88,7 @@
             }
         },
         mounted(){
-            axios.get(`${process.env.VUE_APP_API_URL}/api/device/`, {
+            axios.get(`https://api-egg.herokuapp.com/api/device/`, {
                 headers: { token: localStorage.getItem('token') }
             })
             .then(res => {
@@ -107,7 +107,7 @@
                     device_id: this.device_id,
                     device_name: this.device_name
                 }
-                axios.put(`${process.env.VUE_APP_API_URL}/api/device/add`, newDevice, {
+                axios.put(`https://api-egg.herokuapp.com/api/device/add`, newDevice, {
                     headers: { token: localStorage.getItem('token') }
                 })
                 .then(res=>{

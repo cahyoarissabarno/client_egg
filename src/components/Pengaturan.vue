@@ -73,7 +73,7 @@
             Navigation
         },
         mounted(){
-            axios.get(`${process.env.VUE_APP_API_URL}/api/device/dashboard/${this.$route.params.device_id}`, {
+            axios.get(`https://api-egg.herokuapp.com/api/device/dashboard/${this.$route.params.device_id}`, {
                 headers: { token: localStorage.getItem('token') }
             })
             .then(res => {

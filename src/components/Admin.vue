@@ -33,7 +33,7 @@
                 let device = {
                     device_id: this.device_id
                 }
-                axios.post(`${process.env.VUE_APP_API_URL}/api/admin/device`, device, {
+                axios.post(`https://api-egg.herokuapp.com/api/admin/device`, device, {
                     headers: { token: localStorage.getItem('token') }
                 })
                 .then(res => {

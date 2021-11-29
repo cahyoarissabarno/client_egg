@@ -57,7 +57,7 @@
             }
         },
         mounted(){
-            axios.get(`${process.env.VUE_APP_API_URL}/api/admin/device`, {
+            axios.get(`https://api-egg.herokuapp.com/api/admin/device`, {
                 headers: { token: localStorage.getItem('token') }
             })
             .then(res => {

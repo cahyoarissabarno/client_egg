@@ -99,7 +99,7 @@
                 let data = {
                     email: this.emailReset
                 }
-                axios.put(`${process.env.VUE_APP_API_URL}/api/user/reset-password`, data)
+                axios.put(`https://api-egg.herokuapp.com/api/user/reset-password`, data)
                 .then(res=>{
                     if (res.status === 200) {
                         this.message = 'Link reset password telah dikirim, silahkan cek email anda'

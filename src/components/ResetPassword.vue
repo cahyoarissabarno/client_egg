@@ -52,7 +52,7 @@ export default {
                 password: this.password
             }
             if (this.password == this.password2) {
-                axios.put(`${process.env.VUE_APP_API_URL}/api/user/reset-password/${this.$route.params.token}`, data)
+                axios.put(`https://api-egg.herokuapp.com/api/user/reset-password/${this.$route.params.token}`, data)
                 .then(res=>{
                     if (res.status === 200) {
                         this.message = ''
