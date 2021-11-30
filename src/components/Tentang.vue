@@ -22,7 +22,7 @@
                                         <h5 class="card-title fw-bold">The Egg Cracker</h5>
                                         <p class="card-text my-0">Akun: {{ user.email }}</p>
                                         <p class="card-text my-0">Username: {{ user.username }}</p>
-                                        <p class="card-text my-0">Device ID: {{ device[0].device_id }}</p>
+                                        <p class="card-text my-0">Device ID: {{ device.device_id }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -44,8 +44,8 @@
         },
         data(){
             return {
-                device: [],
-                user: []
+                device: '',
+                user: ''
             }
         },
         created(){
@@ -59,7 +59,7 @@
             })
             .then(res => {
                 if (res.status === 200) {
-                    this.device = res.data.getDevice,
+                    this.device = res.data.getDevice[0],
                     this.user = res.data.getUser
                 }
             },err => {
