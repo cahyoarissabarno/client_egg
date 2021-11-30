@@ -66,7 +66,7 @@
         name: 'Pengaturan',
         data(){
             return {
-                device: null
+                device: []
             }
         },
         components:{

@@ -44,8 +44,8 @@
         },
         data(){
             return {
-                device: '',
-                user: ''
+                device: [],
+                user: []
             }
         },
         created(){
