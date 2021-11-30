@@ -47,7 +47,9 @@ router.beforeEach((to, from, next)=>{
     if (to.name === 'reset-password') next()
     else next({name: 'login'})
   } 
-  if (to.name === 'login' && localStorage.getItem('token') != null) next(from) 
+  if (from.name !== 'device'){
+    if (to.name === 'login' && localStorage.getItem('token') != null) next(from) 
+  }
   if (to.name === 'admin'){
     axios.get(`https://api-egg.herokuapp.com/api/admin/validate`, {
         headers: { token: localStorage.getItem('token') }
