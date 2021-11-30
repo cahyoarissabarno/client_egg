@@ -18,7 +18,7 @@
                             <div class="col-md-4 pt-3">
                                 <div class="content-1">
                                     <div class="d-flex align-items-center justify-content-center mb-2">
-                                        <img src="img/thermo.png" style="height: 80px;" alt="">
+                                        <img src="../assets/thermo.png" style="height: 80px;" alt="">
                                         <div class="content-text ms-3">
                                             <h2 class="content-title text-center fw-bold lh-1 mb-1" style="font-size: 40px;">{{sensor.field1}}°C</h2>
                                             <p class="content-text text-center mb-0 lh-1" style="color: #a1a0b4;">Suhu</p>
@@ -41,7 +41,7 @@
                             <div class="col-md-4 pt-3">
                                  <div class="content-2">
                                     <div class="d-flex align-items-center justify-content-center mb-2">
-                                        <img src="img/humid.png" style="height: 80px;" alt="">
+                                        <img src="../assets/humid.png" style="height: 80px;" alt="">
                                         <div class="content-text ms-3">
                                             <h2 class="content-title text-center fw-bold lh-1 mb-1" style="font-size: 40px;">{{sensor.field2}}%</h2>
                                             <p class="content-text text-center mb-0 lh-1" style="color: #a1a0b4;">Kelembaban</p>
@@ -110,43 +110,6 @@
                                     </div>
                                   </div>
                               </div>
-                            </div>
-                            <!-- <div class="col-md">
-                                <div class="card" style="border-radius: 10px; background-color: #384ccc;">
-                                    <div class="card-body d-flex align-items-center justify-content-center">
-                                        <h5 class="card-title mb-0">
-                                            <a class="text-white" href="#" style="text-decoration: none;" data-bs-toggle="modal" data-bs-target="#addModal">Tambah Slot</a>
-                                        </h5>
-                                    </div>
-                                </div>
-                            </div> -->
-                            
-                            <!-- addModal -->
-                            <div class="modal fade" id="addModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="staticBackdropLabel">Tambah Slot</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form>
-                                                <div class="mb-3">
-                                                <label for="jumlahTelur" class="form-label">Jumlah Teur</label>
-                                                <input type="number" v-model="egg_sum" class="form-control" id="jumlahTelur">
-                                                </div>
-                                                <div class="mb-3">
-                                                <label for="tanggal" class="form-label">Tanggal Mulai</label>
-                                                <input type="date" v-model="started_at" class="form-control" id="tanggal">
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary" @click="addSlot" data-bs-dismiss="modal">Tambah</button>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
 
                             <!-- editModal -->
