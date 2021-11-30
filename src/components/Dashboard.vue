@@ -199,18 +199,18 @@
                 .then(response => (
                     this.allData = response.data.feeds,
                     this.sensor = this.allData[this.allData.length-1],
-                    this.addAlert(),
-                    this.checkUrl()
+                    this.addAlert()
+                    // this.checkUrl()
                 ))
 
             }, 100 );
         },
         methods: {
-            checkUrl(){
-                if (this.currentUrl != window.location.href) {
-                    window.location.reload()
-                }
-            },
+            // checkUrl(){
+            //     if (this.currentUrl != window.location.href) {
+            //         window.location.reload()
+            //     }
+            // },
             addAlert(){
                 if (this.sensor.field1 > 41.00) { this.alertTemp = 'Suhu Terlalu Tinggi, Periksa Kondisi Lampu' }
                 if (this.sensor.field1 < 37.00) { this.alertTemp = 'Suhu Terlalu Rendah, Periksa Kondisi Lampu' }
