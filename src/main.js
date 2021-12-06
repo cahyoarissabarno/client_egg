@@ -41,12 +41,13 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next)=>{
   // if (to.name === 'reset-password')
-  if (to.name !== 'login' && localStorage.getItem('token') == null) {
-    if (to.name === 'landing') next()
-    if (to.name === 'register') next()
-    if (to.name === 'reset-password') next()
-    else next({name: 'login'})
-  } 
+  if (to.name !== 'login' && localStorage.getItem('token') == null && to.name !== 'landing' && to.name !== 'register' && to.name !== 'reset-password') {
+    next({name: 'login'})
+  }
+  if (to.name === 'login' && localStorage.getItem('token') != null) next(from)
+  if (to.name === 'register' && localStorage.getItem('token') != null) next(from)
+  if (to.name === 'reset-password' && localStorage.getItem('token') != null) next(from)
+
   if (from.name !== 'device'){
     if (to.name === 'login' && localStorage.getItem('token') != null) next(from) 
   }
