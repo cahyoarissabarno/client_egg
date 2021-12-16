@@ -22,7 +22,7 @@
               <h1 class="display-3 lh-1 fw-bold">THE EGG CRACKER</h1>
             </div>
             <div class="mt-4">
-              <p class="text-center">
+              <p>
                 The Egg Cracker adalah inkubator untuk menjaga telur tetap hangat 
                 dan berada dalam kelembaban yang tepat yang juga dilengkapi dengan mekanisme berputar 
                 untuk memutar telur sehingga penghangatan lebih merata.
@@ -32,12 +32,12 @@
             </a> -->
             <div class="row">
               <div class="col-md-3">
-                <router-link :to="{ path: '/device'}" class="btn btn-light mt-3 mb-5 fw-bold" style="color: #384ccc; border-radius: 30px; width: 120px;" role="button"> 
+                <router-link :to="{ path: '/device'}" class="btn btn-light mx-2 my-2 fw-bold" style="color: #384ccc; border-radius: 30px; width: 120px;" role="button"> 
                   Mulai
                 </router-link>
               </div>
               <div class="col-md-9">
-                <router-link :to="{ path: '/demo/device'}" class="btn btn-outline-light mt-3 mb-5 px-4 fw-bold" style="border-radius: 30px;" role="button"> 
+                <router-link :to="{ path: '/demo/device'}" class="btn btn-outline-light mx-2 my-2 px-4 fw-bold" style="border-radius: 30px;" role="button"> 
                   Coba Website Demo
                 </router-link>
               </div>

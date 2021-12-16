@@ -12,7 +12,7 @@
                 </div>
             </div>
             <div class="col-md-5">
-                <div class="user-regis position-relative mt-auto mb-auto" style="padding: 80px 70px;">
+                <div class="user-regis position-relative mt-auto mb-auto" style="padding: 50px 30px;">
                     <h2 class="text-center mb-4">Daftar</h2>
                     <p>{{message}}</p>
                     <div class="form-group mb-3">
@@ -30,16 +30,15 @@
                     <div class="form-group mb-3">
                         <label for="inputAPI" class="form-label mb-0">Device ID</label>
                         <input type="text" v-model="device_id" class="form-control form-control ms-auto me-auto" style="border-radius: 30px;" placeholder="Masukkan API Key">    
+                        <div class="form-text">*Temukan Device ID pada produk</div>
                     </div>
                     <div class="form-group text-center">
-                        <p class="text-center mt-3 mb-0">*Temukan Device ID pada produk</p>
                         <input class="btn text-white mt-3 mb-3" style="border-radius: 30px; width: 120px; background-color: #384ccc;" type="submit" value="Daftar" @click="register">
                     </div> 
-                    
-                    <div class="signup text-center">
+                    <div class="signup text-center mb-md-5">
                         Sudah punya akun? Masuk <router-link :to="{ path: '/login'}"> disini.</router-link>
                     </div>
-                    <div class="credit text-center position-absolute bottom-0 start-50 translate-middle-x">Copyright © 2021 The Egg Cracker</div>
+                    <small class="text-center position-absolute bottom-0 start-50 translate-middle-x w-100 mb-2">Copyright © 2021 The Egg Cracker</small>
                 </div>
             </div>
         </div>
