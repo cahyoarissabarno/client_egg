@@ -30,9 +30,18 @@
             </div>
             <!-- <a class="btn btn-light mt-3 mb-5" style="color: #384ccc; border-radius: 30px; width: 120px;" role="button">
             </a> -->
-            <router-link :to="{ path: '/device'}" class="btn btn-light mt-3 mb-5" style="color: #384ccc; border-radius: 30px; width: 120px;" role="button"> 
-              Mulai
-            </router-link>
+            <div class="row">
+              <div class="col-md-3">
+                <router-link :to="{ path: '/device'}" class="btn btn-light mt-3 mb-5 fw-bold" style="color: #384ccc; border-radius: 30px; width: 120px;" role="button"> 
+                  Mulai
+                </router-link>
+              </div>
+              <div class="col-md-9">
+                <router-link :to="{ path: '/demo/device'}" class="btn btn-outline-light mt-3 mb-5 px-4 fw-bold" style="border-radius: 30px;" role="button"> 
+                  Coba Website Demo
+                </router-link>
+              </div>
+            </div>
           </div>
         </div>
       </div>       

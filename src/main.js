@@ -19,6 +19,13 @@ import Tentang from './components/Tentang.vue'
 import LandingPage from './components/LandingPage.vue'
 import ResetPassword from './components/ResetPassword.vue'
 
+// Demo Page Components
+import DemoDevice from './components/Demo/Device.vue'
+import DemoDashboard from './components/Demo/Dashboard.vue'
+import DemoPengaturan from './components/Demo/Pengaturan.vue'
+import DemoBantuan from './components/Demo/Bantuan.vue'
+import DemoTentang from './components/Demo/Tentang.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -31,7 +38,14 @@ const routes = [
   { name: 'dashboard', path: '/dashboard/:device_id', component: Dashboard }, // Dashboard Monitoring
   { name: 'pengaturan', path: '/pengaturan/:device_id', component: Pengaturan },
   { name: 'bantuan', path: '/bantuan/:device_id', component: Bantuan },
-  { name: 'tentang', path: '/tentang/:device_id', component: Tentang }
+  { name: 'tentang', path: '/tentang/:device_id', component: Tentang },
+
+  // Demo Page Route
+  { name: 'demoDevice', path: '/demo/device', component: DemoDevice },
+  { name: 'demoDashboard', path: '/demo/dashboard', component: DemoDashboard }, 
+  { name: 'demoPengaturan', path: '/demo/pengaturan', component: DemoPengaturan },
+  { name: 'demoBantuan', path: '/demo/bantuan', component: DemoBantuan },
+  { name: 'demoTentang', path: '/demo/tentang', component: DemoTentang }
 ]
 
 const router = new VueRouter({
@@ -41,9 +55,11 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next)=>{
   // if (to.name === 'reset-password')
-  if (to.name !== 'login' && localStorage.getItem('token') == null && to.name !== 'landing' && to.name !== 'register' && to.name !== 'reset-password') {
-    next({name: 'login'})
-  }
+  if (
+    to.name !== 'login' && localStorage.getItem('token') == null && to.name !== 'landing' && to.name !== 'register' && to.name !== 'reset-password'
+    && to.name === 'demoDevice' && to.name === 'demoDashboard' && to.name === 'demoPengaturan' && to.name === 'demoBantuan' && to.name === 'demoTentang'
+  ) { next({name: 'login'}) }
+
   if (to.name === 'login' && localStorage.getItem('token') != null) next(from)
   if (to.name === 'register' && localStorage.getItem('token') != null) next(from)
   if (to.name === 'reset-password' && localStorage.getItem('token') != null) next(from)

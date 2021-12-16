@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid">
         <div class="row min-vh-100 flex-column flex-md-row">
-            <Navigation></Navigation>
+            <DemoNavigation></DemoNavigation>
             <main class="col px-0 flex-grow-1">
                 <div class="row">
                     <div class="col-md px-5">
@@ -18,7 +18,7 @@
                             <div class="col-md-4 pt-3">
                                 <div class="content-1">
                                     <div class="d-flex align-items-center justify-content-center mb-2">
-                                        <img src="../assets/thermo.png" style="height: 80px;" alt="">
+                                        <img src="../../assets/thermo.png" style="height: 80px;" alt="">
                                         <div class="content-text ms-3">
                                             <h2 class="content-title text-center fw-bold lh-1 mb-1" style="font-size: 40px;">{{sensor.field1}}°C</h2>
                                             <p class="content-text text-center mb-0 lh-1" style="color: #a1a0b4;">Suhu</p>
@@ -41,7 +41,7 @@
                             <div class="col-md-4 pt-3">
                                  <div class="content-2">
                                     <div class="d-flex align-items-center justify-content-center mb-2">
-                                        <img src="../assets/humid.png" style="height: 80px;" alt="">
+                                        <img src="../../assets/humid.png" style="height: 80px;" alt="">
                                         <div class="content-text ms-3">
                                             <h2 class="content-title text-center fw-bold lh-1 mb-1" style="font-size: 40px;">{{sensor.field2}}%</h2>
                                             <p class="content-text text-center mb-0 lh-1" style="color: #a1a0b4;">Kelembaban</p>
@@ -146,21 +146,32 @@
     </div>
 </template>
 <script>
-    import Navigation from '../components/Navigation.vue'
+    import DemoNavigation from '../Demo/Navigation.vue'
     import axios from 'axios';
 
     export default {
-        name: 'Device',
+        name: 'DemoDashboard',
         components:{
-            Navigation
+            DemoNavigation
         },
         data(){
             return {
                 device: '',
                 user: '',
-                slots: '',
+                slots: [
+                    { slot_no: 1, status: "Berjalan", started_at: "2021-12-15", egg_sum: 8 },
+                    { slot_no: 2, status: "Tidak Digunakan", started_at: "--", egg_sum: "--" },
+                    { slot_no: 3, status: "Tidak Digunakan", started_at: "--", egg_sum: "--" },
+                    { slot_no: 4, status: "Tidak Digunakan", started_at: "--", egg_sum: "--" },
+                    { slot_no: 5, status: "Tidak Digunakan", started_at: "--", egg_sum: "--" },
+                    { slot_no: 6, status: "Tidak Digunakan", started_at: "--", egg_sum: "--" },
+                    { slot_no: 7, status: "Tidak Digunakan", started_at: "--", egg_sum: "--" }
+                ],
                 allData: '',
-                sensor: '',
+                sensor: {
+                    field1: 39.00,
+                    field2: 57.00
+                },
                 egg_sum: '',
                 started_at: '',
                 new_egg_sum: '',
@@ -172,37 +183,17 @@
                 currentUrl: ''
             }
         },
-        created(){
-            if (localStorage.getItem('token') === null) {
-                this.$router.push('/login')
+        mounted(){
+            if (this.sensor.field1 > 41.00) { this.alertTemp = 'Suhu Terlalu Tinggi, Periksa Kondisi Lampu' }
+            if (this.sensor.field1 < 37.00) { this.alertTemp = 'Suhu Terlalu Rendah, Periksa Kondisi Lampu' }
+            if (this.sensor.field2 > 61.00) { this.alertHumid = 'Kelembapan Terlalu Tinggi, Periksa Kondisi Lampu' }
+            if (this.sensor.field2 < 38.00) { this.alertHumid = 'Kelembapan Terlalu Rendah, Periksa Kondisi Lampu' }
+            else {
+                this.alertTemp = 'Kondisi Aman' 
+                this.alertHumid = 'Kondisi Aman' 
             }
-            this.currentUrl = window.location.href
         },
         methods: {
-            initialGet(){
-                axios.get(`https://api-egg.herokuapp.com/api/device/dashboard/${this.$route.params.device_id}`, {
-                    headers: { token: localStorage.getItem('token') }
-                })
-                .then(res => {
-                    if (res.status === 200) {
-                        this.device = res.data.getDevice,
-                        this.user = res.data.getUser,
-                        this.slots = res.data.getDevice[0].slot
-                    }
-                },err => {
-                    console.log(err)
-                });
-            },
-            addAlert(){
-                if (this.sensor.field1 > 41.00) { this.alertTemp = 'Suhu Terlalu Tinggi, Periksa Kondisi Lampu' }
-                if (this.sensor.field1 < 37.00) { this.alertTemp = 'Suhu Terlalu Rendah, Periksa Kondisi Lampu' }
-                if (this.sensor.field2 > 61.00) { this.alertHumid = 'Kelembapan Terlalu Tinggi, Periksa Kondisi Lampu' }
-                if (this.sensor.field2 < 38.00) { this.alertHumid = 'Kelembapan Terlalu Rendah, Periksa Kondisi Lampu' }
-                else {
-                    this.alertTemp = 'Kondisi Aman' 
-                    this.alertHumid = 'Kondisi Aman' 
-                }
-            },
             countDate(getDate){
 
                 if (getDate == "--") {
@@ -223,55 +214,23 @@
             }, 
             updateSlot(){
                 let newSlot = {
-                    device_id : this.device[0]._id,
                     slot_no : this.currentSlot.slot_no,
                     egg_sum : this.new_egg_sum ? this.new_egg_sum : this.currentSlot.egg_sum,
                     started_at : this.new_started_at ? this.new_started_at : this.currentSlot.started_at,
                     status : "Berjalan"
                 }
-                axios.put(`https://api-egg.herokuapp.com/api/timeline/update`, newSlot, {
-                    headers: { token: localStorage.getItem('token') }
-                })
-                .then(res=>{
-                    this.initialGet()
-                    this.message = "Berhasil Mengubah Slot"
-                }, err => {
-                    this.message = "Mengubah Slot Gagal," + this.message + " " + err.response.data.message + " (" + err.response.status +")" 
-                })
+                this.slots.splice(this.currentSlot.slot_no - 1, 1, newSlot)
             },
             endSlot(noSlot){
                 this.currentSlot = this.slots[noSlot-1]
-
-                let slot = {
-                    device_id : this.device[0]._id,
-                    slot_no : this.currentSlot.slot_no
+                let stopSlot = {
+                    slot_no : this.currentSlot.slot_no,
+                    egg_sum : "--",
+                    started_at : "--",
+                    status : "Tidak Digunakan"
                 }
-                axios.put(`https://api-egg.herokuapp.com/api/timeline/delete`, slot, {
-                    headers: { token: localStorage.getItem('token') }
-                })
-                .then(res=>{
-                    this.initialGet()
-                    this.message = "Berhasil Menghentikan Slot"
-                }, err => {
-                    this.message = "Menghentikan Slot Gagal," + this.message + " " + err.response.data.message + " (" + err.response.status +")" 
-                })
+                this.slots.splice(this.currentSlot.slot_no - 1, 1, stopSlot)
             }
-        },
-        mounted(){
-            this.initialGet()
-            
-            // get data every 100ms
-            this.interval = setInterval(() => {
-                axios
-                .get(`https://api.thingspeak.com/channels/${this.$route.params.device_id}/feeds.json?results=2`)
-                .then(response => (
-                    this.allData = response.data.feeds,
-                    this.sensor = this.allData[this.allData.length-1],
-                    this.addAlert()
-                    // this.checkUrl()
-                ))
-
-            }, 100 );
         }
     }
 </script>
