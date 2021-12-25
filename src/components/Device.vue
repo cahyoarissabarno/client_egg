@@ -87,19 +87,6 @@
                 this.$router.push('/login')
             }
         },
-        mounted(){
-            axios.get(`https://api-egg.herokuapp.com/api/device/`, {
-                headers: { token: localStorage.getItem('token') }
-            })
-            .then(res => {
-                if (res.status === 200) {
-                    this.devices = res.data.allDevice
-                    this.user_id = res.data.getUser._id
-                }
-            },err => {
-                this.$router.push('/login')
-            });
-        },
         methods: {
             addDevice(){
                 let newDevice = {
@@ -111,11 +98,28 @@
                     headers: { token: localStorage.getItem('token') }
                 })
                 .then(res=>{
+                    this.getUserDevice()
                     this.message = "Berhasil Menambahkan Device"
                 }, err => {
                     this.message = "Menambah Device Gagal," + this.message + " " + err.response.data.message + " (" + err.response.status +")" 
                 })
+            },
+            getUserDevice(){
+                axios.get(`https://api-egg.herokuapp.com/api/device/`, {
+                    headers: { token: localStorage.getItem('token') }
+                })
+                .then(res => {
+                    if (res.status === 200) {
+                        this.devices = res.data.allDevice
+                        this.user_id = res.data.getUser._id
+                    }
+                },err => {
+                    this.$router.push('/login')
+                });
             }
+        },
+        mounted(){
+            this.getUserDevice()
         }
     }
 </script>
