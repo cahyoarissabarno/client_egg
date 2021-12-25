@@ -24,14 +24,18 @@
                     <input type="password" v-model="password" class="form-control form-control ms-auto me-auto" style="border-radius: 30px;" placeholder="Masukkan Password">
                     </div> 
                     <div class="form-group mb-3">
+                        <label for="inputPassword" class="form-label mb-0">Konfirmasi Password</label>
+                    <input type="password" v-model="passwordVal" class="form-control form-control ms-auto me-auto" style="border-radius: 30px;" placeholder="Masukkan Kembali Password">
+                    </div> 
+                    <div class="form-group mb-3">
                         <label for="inputUsername" class="form-label mb-0">Username</label>
                         <input type="text" v-model="username" class="form-control form-control ms-auto me-auto" style="border-radius: 30px;" placeholder="Masukkan Username">    
                     </div>
-                    <div class="form-group mb-3">
+                    <!-- <div class="form-group mb-3">
                         <label for="inputAPI" class="form-label mb-0">Device ID</label>
                         <input type="text" v-model="device_id" class="form-control form-control ms-auto me-auto" style="border-radius: 30px;" placeholder="Masukkan API Key">    
                         <div class="form-text">*Temukan Device ID pada produk</div>
-                    </div>
+                    </div> -->
                     <div class="form-group text-center">
                         <input class="btn text-white mt-3 mb-3" style="border-radius: 30px; width: 120px; background-color: #384ccc;" type="submit" value="Daftar" @click="register">
                     </div> 
@@ -54,26 +58,32 @@
                 username: '',
                 email: '',
                 password: '',
-                device_id: '',
+                passwordVal: '',
+                // device_id: '',
                 message: ''
             }
         },
         methods: {
             register(){
-                let newUser = {
-                    username: this.username,
-                    email: this.email,
-                    password: this.password,
-                    device_id: this.device_id
+                if (this.password == this.passwordVal) {
+                    let newUser = {
+                        username: this.username,
+                        email: this.email,
+                        password: this.password
+                        // device_id: this.device_id
+                    }
+                    axios.post(`https://api-egg.herokuapp.com/api/user/register`, newUser)
+                    .then(res=>{
+                        this.message = ''
+                        this.$router.push('/login')
+                    }, err => {
+                        this.message = ''
+                        this.message = "Registrasi Gagal," + this.message + " " + err.response.data.message + " (" + err.response.status +")"
+                    })
                 }
-                axios.post(`https://api-egg.herokuapp.com/api/user/register`, newUser)
-                .then(res=>{
-                    this.message = ''
-                    this.$router.push('/login')
-                }, err => {
-                    this.message = ''
-                    this.message = "Registrasi Gagal," + this.message + " " + err.response.data.message + " (" + err.response.status +")"
-                })
+                else {
+                    this.message = 'Pastikan Password dan Konfirmasi Password sama'
+                }
             }
         }
     }
