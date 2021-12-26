@@ -7,7 +7,7 @@
                     <tr>
                         <th scope="col">Device ID</th>
                         <th scope="col">Status</th>
-                        <th scope="col">User ID</th>
+                        <th scope="col">Email</th>
                         <th scope="col">Created at</th>
                         <th scope="col">Action</th>
                     </tr>
@@ -16,7 +16,7 @@
                     <tr scope="row" v-for="(device, index) in devices" :key="index">
                         <th>{{device.device_id}}</th>
                         <td>{{device.status}}</td>
-                        <td v-if="device.user_id">{{getUser(device.user_id)}}</td>
+                        <td v-if="device.user_id" v-model="emails">{{emails[index]}}</td>
                         <td v-if="!device.user_id"></td>
                         <td>{{device.created_at}}</td>
                         <td>
@@ -76,39 +76,60 @@
                 device_id: '',
                 user_id: '',
                 device_name: '',
-                deviceId: ''
+                deviceId: '',
+                emails: [],
+                users: '',
+                state: 0
             }
         },
-        mounted(){
-            axios.get(`https://api-egg.herokuapp.com/api/admin/device`, {
-                headers: { token: localStorage.getItem('token') }
-            })
-            .then(res => {
-                if (res.status === 200) {
-                    this.devices = res.data.devices
-                }
-            },err => {
-                this.message = "Terjadi Kesalahan"
-            });
-        },
         methods : {
-            getUser(userId){
-                axios.get(`https://api-egg.herokuapp.com/api/admin/user/${userId}`, {
-                headers: { token: localStorage.getItem('token') }
+            getUsers(){
+                axios.get(`https://api-egg.herokuapp.com/api/admin/user`, {
+                    headers: { token: localStorage.getItem('token') }
                 })
-                .then(res=>{
-                    // console.log(res)
-                    this.email = res.data.getUser.email
-                }, err => {
-                    this.message = "Terjadi Kesalahan get email user"
+                .then(res => {
+                    if (res.status === 200) {
+                        this.users = res.data.allUser
+                        this.getEmail()
+                    }
+                },err => {
+                    this.message = "Terjadi Kesalahan"
+                });
+            },
+            getDevices(){
+                axios.get(`https://api-egg.herokuapp.com/api/admin/device`, {
+                    headers: { token: localStorage.getItem('token') }
                 })
-                return this.email
+                .then(res => {
+                    this.devices = res.data.devices
+                    if (this.state != 3) {
+                        this.getUsers()
+                    }
+                },err => {
+                    this.message = "Terjadi Kesalahan"
+                });
+            },
+            getEmail(){
+                for (let index = 0; index < this.devices.length; index++) {
+                    let id = this.devices[index].user_id;
+                    let email = this.users.find(x=>x._id === id)
+                
+                    if (email != undefined) {
+                        this.emails[index] = email.email
+                    } else {
+                        this.emails[index] = ''
+                    }
+                }
+                this.state = 3
+                this.getDevices()
             },
             editDevice(index){
                 this.device_id = this.devices[index].device_id
                 this.user_id = this.devices[index].user_id
                 this.device_name = this.devices[index].device_name
                 this.deviceId = this.devices[index]._id
+                this.state = 1
+                this.getDevices()
             }, 
             updateDevice(){
                 let upDevice = {
@@ -121,7 +142,8 @@
                 })
                 .then(res=>{
                     this.message = "Berhasil Mengubah Device"
-                    this.$router.go()
+                    this.state = 1
+                    this.getDevices()
                 }, err => {
                     this.message = "Mengubah Device Gagal," + this.message + " " + err.response.data.message + " (" + err.response.status +")" 
                 })
@@ -132,11 +154,16 @@
                 })
                 .then(res=>{
                     this.message = "Berhasil Menghapus Device"
-                    this.$router.go()
+                    this.state = 1
+                    this.getDevices()
                 }, err => {
                     this.message = "Menghapus Device Gagal," + this.message + " " + err.response.data.message + " (" + err.response.status +")" 
                 })
             }
+        },
+        created(){
+            this.state = 0
+            this.getDevices()
         }
     }
 </script>
