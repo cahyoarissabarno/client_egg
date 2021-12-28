@@ -214,7 +214,13 @@
                 let time = Math.abs(new Date().getTime() - milDate)
                 let result = Math.ceil(time / (1000*60*60*24))
 
-                return this.day = result
+                if (result > 25) {
+                    let expire = result - 25
+                    return this.day = '+ ' + expire.toString() 
+                } 
+                else {
+                    return this.day = result
+                }
             },
             editSlot(noSlot){
                 this.currentSlot = this.slots[noSlot-1]
