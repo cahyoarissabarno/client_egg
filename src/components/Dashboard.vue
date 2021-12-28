@@ -194,14 +194,14 @@
                 });
             },
             addAlert(){
-                if (this.sensor.field1 > 41.00) { this.alertTemp = 'Suhu Terlalu Tinggi, Periksa Kondisi Lampu' }
-                if (this.sensor.field1 < 37.00) { this.alertTemp = 'Suhu Terlalu Rendah, Periksa Kondisi Lampu' }
-                if (this.sensor.field2 > 61.00) { this.alertHumid = 'Kelembapan Terlalu Tinggi, Periksa Kondisi Lampu' }
-                if (this.sensor.field2 < 38.00) { this.alertHumid = 'Kelembapan Terlalu Rendah, Periksa Kondisi Lampu' }
-                else {
-                    this.alertTemp = 'Kondisi Aman' 
-                    this.alertHumid = 'Kondisi Aman' 
-                }
+                if (this.sensor.field1 > 40.00) { this.alertTemp = 'Suhu Terlalu Tinggi, Periksa Kondisi Lampu' }
+                if (this.sensor.field1 < 38.00) { this.alertTemp = 'Suhu Terlalu Rendah, Periksa Kondisi Lampu' }
+                if (this.sensor.field2 > 60.00) { this.alertHumid = 'Kelembapan Terlalu Tinggi, Periksa Kondisi Lampu' }
+                if (this.sensor.field2 < 55.00) { this.alertHumid = 'Kelembapan Terlalu Rendah, Periksa Kondisi Lampu' }
+                // else {
+                //     this.alertTemp = 'Kondisi Aman' 
+                //     this.alertHumid = 'Kondisi Aman' 
+                // }
             },
             countDate(getDate){
 
