@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import 'bootstrap-icons/font/bootstrap-icons.json'
+import 'font-awesome/css/font-awesome.min.css'
 
 import Register from './components/Register.vue'
 import Login from './components/Login.vue'

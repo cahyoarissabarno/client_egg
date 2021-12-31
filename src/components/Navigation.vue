@@ -11,25 +11,25 @@
             <ul class="navbar-nav flex-column">
             <li class="nav-item ">
               <router-link :to="{ name: 'dashboard', params: {device_id: device_id} }" class="nav-link active d-flex align-items-center" aria-current="page" style="color: #384ccc;">
-                <i class='bx bx-line-chart fs-4'></i>
+                <i class="fas fa-chart-line"></i>
                 <span class="links-name ms-3">Monitoring</span>
               </router-link>
             </li>
             <li class="nav-item">
               <router-link :to="{ name: 'pengaturan', params: {device_id: device_id} }" class="nav-link d-flex align-items-center" aria-current="page" style="color: #384ccc;">
-                <i class='bx bx bx-cog fs-4'></i>
+                <i class="fas fa-cog"></i>
                 <span class="links-name ms-3">Pengaturan</span>
               </router-link>
             </li>
             <li class="nav-item">
               <router-link :to="{ name: 'bantuan', params: {device_id: device_id} }" class="nav-link d-flex align-items-center" aria-current="page" style="color: #384ccc;">
-                <i class='bx bxs-help-circle fs-4'></i>
+                <i class="fas fa-question-circle"></i>
                 <span class="links-name ms-3">Bantuan</span>
               </router-link>
             </li>
             <li class="nav-item">
               <router-link :to="{ name: 'tentang', params: {device_id: device_id} }" class="nav-link d-flex align-items-center" style="color: #384ccc;">
-                <i class='bx bxs-info-circle fs-4'></i>
+                <i class="fas fa-info-circle"></i>
                 <span class="links-name ms-3">Tentang</span>
               </router-link>
             </li>
